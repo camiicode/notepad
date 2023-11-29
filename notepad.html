@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Local-Notepad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iNTEyLjAwMDAwMHB0IiBoZWlnaHQ9IjUxMi4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDUxMi4wMDAwMDAgNTEyLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsNTEyLjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPHBhdGggZD0iTTM4MTMgNDg4NSBjLTg5IC0yNCAtMTcxIC03MiAtMjM4IC0xNDAgLTE2MyAtMTYzIC0yMDIgLTQwMyAtOTkKLTYxMiBsMjYgLTU1IC0yNTAgLTI1MiBjLTE2MSAtMTYxIC0yNTMgLTI2MSAtMjU3IC0yNzggLTE3IC02OSAzMCAtMTI4IDEwMwotMTI4IGw0NSAwIDI1NiAyNTQgMjU2IDI1NSAzNSAtMTkgYzE2MSAtODcgMzYzIC04NiA1MTcgMiA2MyAzNSAxNjEgMTMxIDE5NgoxOTEgOTEgMTU1IDk1IDM1MyAxMCA1MjIgLTU5IDExNiAtMjE4IDIzNiAtMzUxIDI2NCAtNzEgMTUgLTE4NSAxMyAtMjQ5IC00eiIvPgo8L2c+Cjwvc3ZnPgo=">
+    <style>
+      body {
+        color: #fff;
+        background-color: #1c1b22;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        overflow-x: hidden;
+        max-width: 95%;
+        margin: auto;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        font-family: "Ubuntu Mono";
+      }
+      body img {
+        max-width: 500px;
+      }
+      .code-block {
+        background-color: #2d2d2d;
+        color: #fff;
+        font-family: "Ubuntu Mono";
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body id="body" contenteditable="true">
+    <script>
+      const editor = document.getElementById('body');
+      let isCodeBlock = false;
+
+      // Restaura el contenido guardado en localStorage al cargar la página
+      window.onload = function() {
+        const contenidoGuardado = localStorage.getItem('contenido');
+        if (contenidoGuardado) {
+          editor.innerHTML = contenidoGuardado;
+        }
+      };
+
+      // Guarda el contenido en localStorage cuando se cierra la página
+      window.addEventListener('beforeunload', function() {
+        const contenido = editor.innerHTML;
+        localStorage.setItem('contenido', contenido);
+      });
+
+      // Reemplaza la función predeterminada del tabulador
+      editor.addEventListener('keydown', function(event) {
+        if (event.key === 'Tab') {
+          event.preventDefault();
+          document.execCommand('insertText', false, '    '); // Inserta dos espacios en lugar de una tabulación
+        }
+      });
+
+      // Función para aplicar estilo al texto seleccionado
+      function applyStyle(command) {
+        document.execCommand(command, false, null);
+      }
+
+      // Eventos para detectar atajos de teclado
+      editor.addEventListener('keydown', function(event) {
+        if (event.ctrlKey) {
+          switch (event.key) {
+            case 'b':
+              event.preventDefault();
+              applyStyle('bold');
+              break;
+            case 'i':
+              event.preventDefault();
+              applyStyle('italic');
+              break;
+            case 'u':
+              event.preventDefault();
+              applyStyle('underline');
+              break;
+          }
+        }
+      });
+
+      // Agrega el evento "paste" al editor para limpiar el contenido pegado
+      editor.addEventListener('paste', cleanPasteContent);
+
+      document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey || event.metaKey) {
+          var headerLevel = null;
+          
+          switch (event.key) {
+            case '1':
+              headerLevel = 'h1';
+              break;
+            case '2':
+              headerLevel = 'h2';
+              break;
+            case '3':
+              headerLevel = 'h3';
+              break;
+            case '4':
+              headerLevel = 'h4';
+              break;
+            case '5':
+              headerLevel = 'h5';
+              break;
+            case '6':
+              headerLevel = 'h6';
+              break;
+            default:
+              break;
+          }          
+          if (headerLevel) {
+            event.preventDefault();            
+            var header = document.createElement(headerLevel);
+            header.textContent = 'Texto ingresado';            
+            document.body.appendChild(header);
+          }
+        }
+      });
+
+      document.body.addEventListener('paste', function(event) {
+        handlePaste(event);
+      });
+      function handlePaste(event) {
+        var items = event.clipboardData.items;
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].type.indexOf('image') !== -1) {
+            var imageFile = items[i].getAsFile();
+            var imageUrl = URL.createObjectURL(imageFile);
+            var uniqueId = generateUniqueId();
+            var imageElement = new Image();
+            imageElement.src = imageUrl;
+            imageElement.id = uniqueId;
+            editor.appendChild(imageElement);
+          }
+        }
+      }
+      // Función para generar un identificador único
+      function generateUniqueId() {
+        return 'image-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+      }
+
+      // Función para limpiar el contenido pegado y eliminar etiquetas HTML
+      function cleanPasteContent(event) {
+        event.preventDefault();
+        const clipboardData = event.clipboardData || window.clipboardData;
+        const pastedData = clipboardData.getData('text/plain');
+        document.execCommand('insertText', false, pastedData);
+      }
+
+      // Evento para detectar la combinación de teclas "ALT + C"
+      editor.addEventListener('keydown', function(event) {
+        if (event.altKey && event.key === 'c') {
+          if (isCodeBlock) {
+            isCodeBlock = false;
+          } else {
+            isCodeBlock = true;
+            const codeBlock = document.createElement('div');
+            codeBlock.classList.add('code-block');
+            codeBlock.setAttribute('spellcheck', 'false'); // Desactiva el corrector ortográfico
+            editor.appendChild(codeBlock);
+          }
+          event.preventDefault();
+        }
+      });
+
+      // Función para generar un identificador único
+      function generateUniqueId() {
+        return 'image-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+      }
+    </script>
+  </body>
+</html>
