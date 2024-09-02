@@ -139,14 +139,15 @@
         margin-left: 10px;
       }
 
-      .info-tab a {
+      .info-tab button {
         padding: 5px 10px 7px 12px;
-        background-color: var(--color-secondary);
+        background: var(--color-secondary);
         border-radius: 50px;
         margin-bottom: 0;
         margin-top: 0;
         color: rgba(255,255,255,.5);
         line-height: 1;
+        border: none;
       }
 
       .tab-list #create-tab {
@@ -299,6 +300,73 @@
       .tab-list::-webkit-scrollbar-thumb:hover {
         background: var(--color-scrollbar-hover);
       }
+
+      #modals {
+        
+        @starting-style {
+          display: block;
+          opacity: 1;
+          scale: 1;
+        }
+
+        *, *::before, *::after {
+          box-sizing: border-box;
+          padding: 0;
+        }
+
+        dialog {
+          display: none;
+          opacity: 0;
+          scale: 0;
+          max-height: fit-content;
+          border-radius: 15px;
+          box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+          overflow: hidden;
+          background-color: var(--color-background);
+          color: var(--color-primary) !important;
+          border: 0px;
+
+          .info-content__header {
+            padding: 1rem 1rem 0 1rem;
+            text-align: center;
+            p {
+              text-align: justify;
+            }
+          }
+          .info-content__main {
+            padding: 0rem 1rem;
+            ol {
+              padding-left: 2rem;
+              li ul {
+                padding-left: 2rem;
+              }
+            }
+          }
+          .info-content__footer {
+            padding: 0 1rem 1rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            
+            button {
+              padding: 10px 30px;
+              border: 1px solid var(--color-background);
+              background-color: var(--color-button-background);
+              color: var(--color-primary);
+              box-shadow: 0px 0px 10px rgba(0,0,0,.5);
+            }
+          }
+        }
+
+        dialog[open] {
+          display: block;
+          opacity: 1;
+          scale: 1;
+          width: auto;
+          max-width: 600px;
+          height: auto;
+        }
+      }
     </style>
   </head>
   <body id="body">
@@ -308,18 +376,55 @@
       <!-- <div class="options-tab">
         <input type="checkbox" name="dark-mode-toggle" id="dark-mode-toggle">
         <label for="dark-mode-toggle"></label>
-      </div>
-      <div class="info-tab">
-        <a href="#" id="open-modal-info">i</a>
       </div> -->
-    </div>
-    <!-- <div id="modal" class="modal">
-      <div class="modal-box">
-        <div class="modal-content">
-
-        </div>
+      <div class="info-tab">
+        <button onclick="document.querySelector('dialog#info-notepad').showModal()" id="open-modal-info">i</button>
       </div>
-    </div> -->
+    </div>
+
+    <section id="modals">
+
+      <dialog id="info-notepad" class="info" open>
+        <div class="info-container">
+          <div class="info-row">
+            <div class="info-content">
+              <div class="info-content__header">
+                <h1>Bloc de Notas Online Gratuito</h1>
+                <p>Este es un bloc de notas gratuito, sencillo y básico, que puedes usar directamente en tu navegador. Todos los cambios se guardan en el almacenamiento local del navegador, pero ten en cuenta que al recargar sin caché, se perderá la información. Haz un respaldo de tus notas antes de recargar.</p>
+              </div>
+              <div class="info-content__main">
+                <h4>Funcionalidades</h4>
+                <ol>
+                  <li>Cursiva: CTRL + I</li>
+                  <li>Negrita: CTRL + B</li>
+                  <li>Subrayado: CTRL + U</li>
+                  <li>Guardado Automático: Los cambios se guardan en el Local Storage.</li>
+                  <li>Gestión de Pestañ
+                    <ul>
+                      <li>Editar nombre de pestañas</li>
+                      <li>Crear nuevas pestañas</li>
+                      <li>Eliminar pestañas existentes</li>
+                    </ul>
+                  </li>
+                </ol>
+              </div>
+              <div class="info-content__footer">
+                <div class="info-content__footer--left">
+                  <h6>Licencia</h6>
+                  <p>GNU General Public License v3.0</p>
+                </div>
+                <div class="info-content__footer--right">
+                  <form method="dialog">
+                    <button>Cerrar</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
+
+    </section>
     
     <script>
 
