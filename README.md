@@ -26,7 +26,7 @@ _GNU General Public License v3.0_
 
 ### Version
 
-**2.0.0**
+**2.1.1**
 
 ### Colaboradores
 
