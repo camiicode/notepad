@@ -9,9 +9,7 @@
     <link rel="icon" href="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBzdGFuZGFsb25lPSJubyI/Pgo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDIwMDEwOTA0Ly9FTiIKICJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy1TVkctMjAwMTA5MDQvRFREL3N2ZzEwLmR0ZCI+CjxzdmcgdmVyc2lvbj0iMS4wIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiB3aWR0aD0iNTEyLjAwMDAwMHB0IiBoZWlnaHQ9IjUxMi4wMDAwMDBwdCIgdmlld0JveD0iMCAwIDUxMi4wMDAwMDAgNTEyLjAwMDAwMCIKIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIG1lZXQiPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsNTEyLjAwMDAwMCkgc2NhbGUoMC4xMDAwMDAsLTAuMTAwMDAwKSIKZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSJub25lIj4KPHBhdGggZD0iTTM4MTMgNDg4NSBjLTg5IC0yNCAtMTcxIC03MiAtMjM4IC0xNDAgLTE2MyAtMTYzIC0yMDIgLTQwMyAtOTkKLTYxMiBsMjYgLTU1IC0yNTAgLTI1MiBjLTE2MSAtMTYxIC0yNTMgLTI2MSAtMjU3IC0yNzggLTE3IC02OSAzMCAtMTI4IDEwMwotMTI4IGw0NSAwIDI1NiAyNTQgMjU2IDI1NSAzNSAtMTkgYzE2MSAtODcgMzYzIC04NiA1MTcgMiA2MyAzNSAxNjEgMTMxIDE5NgoxOTEgOTEgMTU1IDk1IDM1MyAxMCA1MjIgLTU5IDExNiAtMjE4IDIzNiAtMzUxIDI2NCAtNzEgMTUgLTE4NSAxMyAtMjQ5IC00eiIvPgo8L2c+Cjwvc3ZnPgo=">
     <style>
       /* Definición de variables en :root */
-      :root {
-
-          /* Tamaños */
+      :root {/* Tamaños */
           --font-size-base: 1rem;
           --font-size-large: 1.5rem;
           --font-family-mono: "Ubuntu Mono", monospace;
@@ -23,9 +21,7 @@
           --box-shadow-none: none;
           --scrollbar-width: 2px; /* Ancho del scrollbar */
           --scrollbar-height: 2px; /* Alto del scrollbar}*/
-      }
-
-      @media (prefers-color-scheme: dark) {
+      }@media (prefers-color-scheme: dark) {
         html {
           --color-background: #1c1b22;
           --color-secondary-background: #141414;
@@ -39,9 +35,7 @@
           --color-scrollbar-hover: #555; /* Color del thumb del scrollbar en hover */
         }
       }
-
       /* Aplicación de variables en el código CSS */
-
       body {
           margin: 0;
           padding: var(--padding-base);
@@ -53,15 +47,12 @@
           overflow: hidden;
           font-family: var(--font-family-mono);
       }
-
       body img {
           max-width: 500px;
       }
-
       body button {
           cursor: pointer;
       }
-
       .code-block {
           background-color: var(--color-secondary-background);
           color: var(--color-primary);
@@ -70,7 +61,6 @@
           margin-bottom: var(--margin-base);
           border-radius: var(--border-radius-small);
       }
-
       .tab-list {
           display: flex;
           flex-direction: row;
@@ -81,35 +71,29 @@
           max-width: 99%;
           overflow-x: auto; /* Permite el desplazamiento horizontal */
       }
-
       .options-tab {
         margin-left: auto;
       }
-
       .options-tab input{
         width: 0;
         height: 0;
         visibility: hidden;
         display: none;
       }
-
       .options-tab input:checked + label {
         background-color: #242424;
         transition: ease-in-out .3s all;
       }
-
       .options-tab input:checked + label::after {
         left: 45px;
         transform: translateX(-100%);
         background: linear-gradient(180deg, #777, #3a3a3a);
         transition: ease-in-out .3s all;
       }
-
       .options-tab label:active::after {
         width: 25px;
         transition: ease-in-out .3s all;
       }
-
       .options-tab label {
         width: 50px;
         height: 25px;
@@ -121,7 +105,6 @@
         cursor: pointer;
         transition: ease-in-out .3s all;
       }
-
       .options-tab label::after {
         content: "";
         width: 20px;
@@ -134,11 +117,9 @@
         box-shadow: 0px 5px 10px rgba(0,0,0,.2);
         transition: ease-in-out .3s all;
       }
-
       .info-tab {
         margin-left: 10px;
       }
-
       .info-tab button {
         padding: 5px 10px 7px 12px;
         background: var(--color-secondary);
@@ -149,7 +130,6 @@
         line-height: 1;
         border: none;
       }
-
       .tab-list #create-tab {
         padding: 1px 10px;
         margin: 0 auto 0 0;
@@ -166,13 +146,11 @@
         font-weight: bold;
         line-height: 27px;
       }
-
       .tab-list #create-tab:hover {
         background-color: var(--color-secondary);
         border-color: transparent;
         color: var(--color-primary);
       }
-
       .tab-list__item {
         display: flex;
         justify-content: flex-start;
@@ -181,11 +159,9 @@
         height: auto;
         margin-left: 10px;
       }
-
       .tab-list__item:first-child {
         margin-left: 0;
       }
-
       .tab-list__item .tab-list__item--content {
         display: none;
         background-color: var(--color-secondary);
@@ -202,16 +178,13 @@
         height: 91%;
         min-width: 98vw;
       }
-
       .tab-list__item:last-child {
         margin-right: 10px;
         border-right: 1px solid var(--color-secondary) !important;
       }
-
       .tab-list__item label:hover button {
         display: block;
       }
-
       .tab-list__item label {
         background-color: var(--color-background);
         width: 150px;
@@ -223,7 +196,6 @@
         border-top-right-radius: var(--border-radius);
         cursor: pointer;
       }
-
       .tab-list__item label span {
         color: var(--color-primary);
         text-overflow: ellipsis;
@@ -231,7 +203,6 @@
         width: 80%;
         overflow: hidden;
       }
-
       .tab-list__item label button {
         background-color: var(--color-button-background);
         border-radius: 50%;
@@ -248,73 +219,58 @@
         transform: rotate(-45deg);
         color: var(--color-primary);
       }
-
       .tab-list__item label button.delete-tab {
         background-color: transparent;
         padding: 8px 5px;
         margin: 0 5px;
         transform: rotate(0deg);
       }
-
       .tab-list__item label button.delete-tab:hover {
         background-color: var(--color-button-delete) !important;
       }
-
       .tab-list__item input[type="radio"] {
         display: none;
       }
-
       .tab-list__item input:checked ~ .tab-list__item--content {
         display: block;
       }
-
       .tab-list__item input:checked ~ label {
         background-color: var(--color-secondary);
         transition: background-color ease .3s;
       }
-
       .tab-list__item input:checked ~ label button:hover {
         background-color: var(--color-button-hover);
       }
-
       *[contenteditable="true"]:focus, *[contenteditable="true"]:active {
         border: none;
         outline: none;
       }
-
       /* Estilos del scrollbar */
       .tab-list::-webkit-scrollbar {
         width: var(--scrollbar-width);
         height: var(--scrollbar-height);
       }
-
       .tab-list::-webkit-scrollbar-track {
         background: var(--color-secondary-background);
       }
-
       .tab-list::-webkit-scrollbar-thumb {
         background: var(--color-scrollbar-thumb);
         border-radius: var(--border-radius);
       }
-
       .tab-list::-webkit-scrollbar-thumb:hover {
         background: var(--color-scrollbar-hover);
       }
-
       #modals {
-        
         @starting-style {
           display: block;
           opacity: 1;
           scale: 0;
           transition: ease-in-out 1s all;
         }
-
         *, *::before, *::after {
           box-sizing: border-box;
           padding: 0;
         }
-
         dialog {
           padding: 0rem 1rem 0 1rem;
           display: none;
@@ -327,7 +283,6 @@
           background-color: var(--color-background);
           color: var(--color-primary) !important;
           border: 0px;
-
           .info-content__header {
             text-align: center;
             p {
@@ -348,7 +303,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            
             button {
               padding: 10px 30px;
               border: 1px solid var(--color-background);
@@ -363,7 +317,6 @@
             }
           }
         }
-
         dialog[open] {
           display: block;
           opacity: 1;
@@ -372,13 +325,11 @@
           max-width: 600px;
           height: auto;
         }
-
         #info-license form[method="dialog"],
         #info-terms form[method="dialog"] {
           width: 100%;
           height: auto;
           text-align: right;
-
           button {
             margin-top: 1rem;
             background-color: transparent;
